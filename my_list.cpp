@@ -1,29 +1,26 @@
 #include <iostream>
 class list{
-	public:
-		int Size(){
-			return size;
-		}
 	private:
 	class Node{
 		public:
-		Node* prew;
 		Node* ptrnext;
 		int data;
 		Node(int data = 0,Node* ptrnext = nullptr)
 		{
-			data = data;
-			ptrnext = ptrnext;
+			this->data = data;
+			this->ptrnext = ptrnext;
 
 		}
 	};
 	int size;
-	Node* element;
 	Node* frst;
 	public:
 	list(){
 		frst = nullptr;
 		size = 0;
+	}
+	int Size(){
+		return size;
 	}
 	void pop_front(){
 		Node* temp = frst;
@@ -57,6 +54,46 @@ class list{
 		delete tmp;
 		size--;
 	}
+	void insert(int data,int index){
+		if (index == 0){
+			push_front(data);
+		}
+		else
+		{
+			Node* prew =  frst;
+			for (int i = 0;i < index - 1;i++){
+				prew = prew->ptrnext;
+			}
+			Node* newelement = new Node(data,prew->ptrnext);
+			prew->ptrnext = newelement;
+			size++;
+		}
+	}
+	void erase(int index){
+		if (index == 0){
+			pop_front();
+		}
+		else
+		{
+			Node* prew = frst;
+			for (int i = 0;i < index - 1;i++){
+				prew = prew->ptrnext;
+			}
+			Node* del = prew->ptrnext;
+			prew->ptrnext = del->ptrnext;
+			size --;
+		}
+	}
+	void print(){
+		Node* tv = frst;
+		for (int i = 0;i < size;i++){
+			std::cout<<tv->data<<std::endl;
+			tv->ptrnext != nullptr;
+			tv = tv->ptrnext;
+			
+		}
+
+	}
 
 };
 int main(){
@@ -69,7 +106,11 @@ int main(){
 	a.push_front(8);
 	a.push_front(11);
 	a.pop_back();
+	a.insert(99,2);
+	a.erase(1);
 	a.Size();
+
+	a.print();
 	std::cout<<"size :"<<a.Size()<<std::endl;
 	return 0;
 }
