@@ -1,0 +1,2 @@
+comand - creat and compaile header file -$ g++ main.cpp ./src/test.cpp -I include/ -o main
+
